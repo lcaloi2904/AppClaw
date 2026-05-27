@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { z } from 'zod';
 
 const envSchema = z.object({
-  LLM_PROVIDER: z.enum(['anthropic', 'openai', 'gemini', 'groq', 'ollama']).default('gemini'),
+  LLM_PROVIDER: z.enum(['anthropic', 'openai', 'gemini', 'groq', 'ollama', 'custom_openai']).default('gemini'),
   LLM_API_KEY: z.string().default(''),
   LLM_MODEL: z.string().default(''),
 
@@ -10,6 +10,10 @@ const envSchema = z.object({
   OLLAMA_BASE_URL: z.string().default(''),
   /** Bearer token for Ollama Cloud / authenticated endpoints (optional). */
   OLLAMA_API_KEY: z.string().default(''),
+
+  /** Custom OpenAI compatible provider */
+  CUSTOM_OPENAI_BASE_URL: z.string().default(''),
+  CUSTOM_OPENAI_API_KEY: z.string().default(''),
 
   /** Target platform: "android" or "ios". Empty = prompt on macOS, default android elsewhere. */
   PLATFORM: z.enum(['android', 'ios', '']).default(''),

@@ -115,6 +115,12 @@ export function buildModel(config: AppClawConfig): any {
         baseURL: GROQ_API_BASE_URL,
       })(modelId);
 
+    case 'custom_openai':
+      return createOpenAI({
+        apiKey: config.CUSTOM_OPENAI_API_KEY || config.LLM_API_KEY,
+        baseURL: config.CUSTOM_OPENAI_BASE_URL,
+      })(modelId);
+
     case 'ollama': {
       const ollamaProvider = createOllama({
         ...(config.OLLAMA_BASE_URL ? { baseURL: config.OLLAMA_BASE_URL } : {}),

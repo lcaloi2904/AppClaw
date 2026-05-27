@@ -5,6 +5,7 @@ export const DEFAULT_MODELS: Record<string, string> = {
   gemini: 'gemini-3.1-flash-lite-preview',
   groq: 'llama-3.3-70b-versatile',
   ollama: 'llama3.2',
+  custom_openai: 'gpt-4o',
 };
 
 // Groq uses OpenAI-compatible API
@@ -16,7 +17,7 @@ export const DEFAULT_STUCK_WINDOW_SIZE = 8;
 export const DEFAULT_STUCK_THRESHOLD = 3;
 
 // Vision-capable providers
-export const VISION_PROVIDERS = new Set(['anthropic', 'openai', 'gemini']);
+export const VISION_PROVIDERS = new Set(['anthropic', 'openai', 'gemini', 'custom_openai']);
 
 // Providers that support extended thinking/reasoning
 export const THINKING_PROVIDERS = new Set(['anthropic', 'gemini', 'openai']);
