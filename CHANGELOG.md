@@ -1,3 +1,9 @@
+## Unreleased
+
+### Security
+
+- update dependency lockfile and overrides to reduce npm audit advisories
+
 ## [1.3.4](https://github.com/AppiumTestDistribution/AppClaw/compare/v1.3.3...v1.3.4) (2026-05-15)
 
 ### Bug Fixes

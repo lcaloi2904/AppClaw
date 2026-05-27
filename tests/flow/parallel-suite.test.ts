@@ -9,7 +9,7 @@
  */
 
 import { describe, test, expect, vi } from 'vitest';
-import { resolve, dirname } from 'path';
+import { resolve, dirname, isAbsolute } from 'path';
 import { fileURLToPath } from 'url';
 
 // Mock LLM parser so tests don't need an API key
@@ -153,7 +153,7 @@ describe('parseSuiteYamlFile() — single-doc format', () => {
     const suite = parseSuiteYamlFile(resolve(FIXTURES, 'suite-simple.yaml'));
     for (const flowPath of suite.flows) {
       // All paths should be absolute
-      expect(flowPath.startsWith('/')).toBe(true);
+      expect(isAbsolute(flowPath)).toBe(true);
       // All should point into the fixtures directory
       expect(flowPath).toContain('fixtures');
     }
