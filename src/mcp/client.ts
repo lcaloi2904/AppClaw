@@ -20,9 +20,10 @@ import { VERSION } from '../version.js';
 function resolveAppiumMcp(): { command: string; args: string[] } {
   try {
     const req = createRequire(import.meta.url);
-    const bin = req.resolve('appium-mcp');
-    return { command: 'node', args: [bin] };
-  } catch {
+    const pkgPath = req.resolve('appium-mcp/package.json');
+    const path = req('node:path');
+    return { command: 'node', args: [path.join(path.dirname(pkgPath), 'dist', 'index.js')] };
+  } catch (err) {
     return { command: 'npx', args: ['--yes', 'appium-mcp@1.67.0'] };
   }
 }

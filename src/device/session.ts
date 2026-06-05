@@ -49,12 +49,12 @@ export async function createPlatformSession(
 
   const args: Record<string, unknown> = { platform };
 
-  // Add platform-specific capabilities (serialized as JSON string for appium-mcp)
+  // Add platform-specific capabilities as object (appium-mcp expects record, not JSON string)
   if (platform === 'android') {
     // extraCaps wins over config defaults (e.g. parallel workers override mjpeg/system ports)
     const caps = { ...buildAndroidCapabilities(config), ...extraCaps };
     if (Object.keys(caps).length > 0) {
-      args.capabilities = JSON.stringify(caps);
+      args.capabilities = caps;
     }
   } else if (platform === 'ios') {
     // For iOS, appium-mcp handles most capabilities internally (WDA setup, device selection).
@@ -64,7 +64,7 @@ export async function createPlatformSession(
       ...extraCaps,
     };
     if (Object.keys(iosCaps).length > 0) {
-      args.capabilities = JSON.stringify(iosCaps);
+      args.capabilities = iosCaps;
     }
   }
 
@@ -154,7 +154,7 @@ async function createLambdaTestSession(
   const args: Record<string, unknown> = {
     platform,
     remoteServerUrl: hubUrl,
-    capabilities: JSON.stringify(capabilities),
+    capabilities,
   };
 
   try {
