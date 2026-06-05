@@ -12,8 +12,8 @@ const envSchema = z.object({
   OLLAMA_API_KEY: z.string().default(''),
 
   /** Custom OpenAI compatible provider */
-  CUSTOM_OPENAI_BASE_URL: z.string().default(''),
-  CUSTOM_OPENAI_API_KEY: z.string().default(''),
+  CUSTOM_LLM_BASE_URL: z.string().default(''),
+  CUSTOM_LLM_API_KEY: z.string().default(''),
 
   /** Target platform: "android" or "ios". Empty = prompt on macOS, default android elsewhere. */
   PLATFORM: z.enum(['android', 'ios', '']).default(''),

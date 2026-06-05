@@ -117,8 +117,8 @@ export function buildModel(config: AppClawConfig): any {
 
     case 'custom_openai':
       return createOpenAI({
-        apiKey: config.CUSTOM_OPENAI_API_KEY || config.LLM_API_KEY,
-        baseURL: config.CUSTOM_OPENAI_BASE_URL,
+        apiKey: config.CUSTOM_LLM_API_KEY || config.LLM_API_KEY,
+        baseURL: config.CUSTOM_LLM_BASE_URL,
       })(modelId);
 
     case 'ollama': {
