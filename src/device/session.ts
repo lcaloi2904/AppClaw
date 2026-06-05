@@ -54,7 +54,7 @@ export async function createPlatformSession(
     // extraCaps wins over config defaults (e.g. parallel workers override mjpeg/system ports)
     const caps = { ...buildAndroidCapabilities(config), ...extraCaps };
     if (Object.keys(caps).length > 0) {
-      args.capabilities = caps;
+      args.capabilities = JSON.stringify(caps);
     }
   } else if (platform === 'ios') {
     // For iOS, appium-mcp handles most capabilities internally (WDA setup, device selection).
@@ -64,7 +64,7 @@ export async function createPlatformSession(
       ...extraCaps,
     };
     if (Object.keys(iosCaps).length > 0) {
-      args.capabilities = iosCaps;
+      args.capabilities = JSON.stringify(iosCaps);
     }
   }
 
@@ -161,6 +161,7 @@ async function createLambdaTestSession(
     const sessionResult = await mcp.callTool('appium_session_management', {
       action: 'create',
       ...args,
+      capabilities: JSON.stringify(capabilities),
     });
     const resultText = extractText(sessionResult);
 
