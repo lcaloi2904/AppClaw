@@ -410,8 +410,12 @@ async function main() {
 
   // ─── Explorer mode (PRD → flows) ─────────────────────────
   if (cliArgs.explore) {
-    // Validate LLM API key
-    if (config.LLM_PROVIDER !== 'ollama' && !config.LLM_API_KEY) {
+    const hasValidApiKey =
+      config.LLM_PROVIDER === 'ollama' ||
+      config.LLM_API_KEY ||
+      (config.LLM_PROVIDER === 'custom_openai' && config.CUSTOM_LLM_API_KEY);
+
+    if (!hasValidApiKey) {
       ui.printError(
         `LLM_API_KEY is required for provider "${config.LLM_PROVIDER}".`,
         `Set it in .env or as an environment variable.`
@@ -780,7 +784,12 @@ async function main() {
   // ─── Normal / Record / Plan mode ──────────────────────
 
   // Validate LLM API key
-  if (config.LLM_PROVIDER !== 'ollama' && !config.LLM_API_KEY) {
+  const hasValidApiKeyMain =
+    config.LLM_PROVIDER === 'ollama' ||
+    config.LLM_API_KEY ||
+    (config.LLM_PROVIDER === 'custom_openai' && config.CUSTOM_LLM_API_KEY);
+
+  if (!hasValidApiKeyMain) {
     ui.printError(
       `LLM_API_KEY is required for provider "${config.LLM_PROVIDER}".`,
       `Set it in .env or as an environment variable.`
